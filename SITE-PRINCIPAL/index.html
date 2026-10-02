@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechVision - Manutenção de Equipamentos Tecnológicos</title>
+  <!-- Vinculando o arquivo CSS -->
+  <link rel="stylesheet" href="./stely.css">
+</head>
+<body>
+
+  <!-- 1. TELA DE LOGIN -->
+  <div id="loginScreen" class="login-container">
+    <div class="login-card">
+      <h1 class="brand-title">TechVision</h1>
+      <p class="brand-subtitle">Manutenção de Equipamentos</p>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">E-mail de Acesso</label>
+          <input type="email" id="email" placeholder="seu@email.com" required value="cliente@techvision.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="••••••••" required value="123456">
+        </div>
+
+        <button type="submit" class="btn-submit">ENTRAR NO SISTEMA</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. PAINEL PRINCIPAL (DASHBOARD) -->
+  <div id="dashboardScreen" class="dashboard-container">
+    
+    <header>
+      <div class="header-logo">TechVision</div>
+      <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+    </header>
+
+    <main>
+      <!-- Resumo de Status -->
+      <h2 class="section-title">Resumo de Ordens de Serviço</h2>
+      <div class="status-summary">
+        <div class="status-card verde">
+          <div class="status-card-info">
+            <h4>Concluídos</h4>
+            <p id="countConcluido">0</p>
+          </div>
+        </div>
+        <div class="status-card laranja">
+          <div class="status-card-info">
+            <h4>Em Espera</h4>
+            <p id="countEspera">0</p>
+          </div>
+        </div>
+        <div class="status-card azul">
+          <div class="status-card-info">
+            <h4>Em Atendimento</h4>
+            <p id="countAtendimento">0</p>
+          </div>
+        </div>
+        <div class="status-card vermelho">
+          <div class="status-card-info">
+            <h4>Cancelados</h4>
+            <p id="countCancelado">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Novo Equipamento -->
+      <h2 class="section-title">Cadastrar Novo Serviço</h2>
+      <div class="add-form-container">
+        <form id="addEquipmentForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="equipamento">Equipamento</label>
+              <input type="text" id="equipamento" placeholder="Ex: Notebook Dell XPS" required>
+            </div>
+            <div class="form-group">
+              <label for="cliente">Cliente</label>
+              <input type="text" id="cliente" placeholder="Nome do cliente" required>
+            </div>
+            <div class="form-group">
+              <label for="status">Status Inicial</label>
+              <select id="status">
+                <option value="Em espera">🟠 Em espera</option>
+                <option value="Em atendimento">🔵 Em atendimento</option>
+                <option value="Concluído">🟢 Concluído</option>
+                <option value="Cancelado">🔴 Cancelado</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit" style="margin-top: 10px;">Cadastrar Equipamento</button>
+        </form>
+      </div>
+
+      <!-- Lista de Equipamentos -->
+      <h2 class="section-title">Equipamentos em Manutenção</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Equipamento</th>
+              <th>Cliente</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="equipmentTableBody">
+            <!-- As linhas da tabela serão geradas via JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      &copy; TechVision - Soluções em Manutenção Tecnológica. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- Vinculando o arquivo JS -->
+  <script src="script.js"></script>
+</body>
+</html>
