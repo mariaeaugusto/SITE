@@ -1,20 +1,40 @@
-// Dados Iniciais de Exemplo
+// Dados Iniciais com Relato de Problemas
 let equipamentos = [
-  { id: "OS-1001", nome: "Notebook Lenovo ThinkPad", cliente: "Ana Silva", status: "Em atendimento" },
-  { id: "OS-1002", nome: "Servidor Dell PowerEdge", cliente: "Empresa Alfa", status: "Em espera" },
-  { id: "OS-1003", nome: "MacBook Pro 16", cliente: "Carlos Souza", status: "Concluído" },
-  { id: "OS-1004", nome: "Tablet Samsung Tab S8", cliente: "Mariana Costa", status: "Cancelado" }
+  { 
+    id: "OS-1001", 
+    nome: "Notebook Lenovo ThinkPad", 
+    cliente: "Ana Silva", 
+    problema: "Tela piscando e aquecimento excessivo após 20 minutos de uso.",
+    status: "Em atendimento" 
+  },
+  { 
+    id: "OS-1002", 
+    nome: "Servidor Dell PowerEdge", 
+    cliente: "Empresa Alfa", 
+    problema: "Fonte queimada e HD de backup apresentando ruídos metálicos.",
+    status: "Em espera" 
+  },
+  { 
+    id: "OS-1003", 
+    nome: "MacBook Pro 16", 
+    cliente: "Carlos Souza", 
+    problema: "Troca de bateria e limpeza interna preventiva.",
+    status: "Concluído" 
+  },
+  { 
+    id: "OS-1004", 
+    nome: "Tablet Samsung Tab S8", 
+    cliente: "Mariana Costa", 
+    problema: "Vidro frontal trincado e conector de carga frouxo.",
+    status: "Cancelado" 
+  }
 ];
 
 // Evento de Submit do Formulário de Login
 document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  
-  // Esconde a tela de login e exibe a tela principal
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboardScreen').style.display = 'flex';
-  
-  // Renderiza os dados na tabela
   renderizarTabela();
 });
 
@@ -31,17 +51,23 @@ document.getElementById('addEquipmentForm').addEventListener('submit', function(
   const nome = document.getElementById('equipamento').value;
   const cliente = document.getElementById('cliente').value;
   const status = document.getElementById('status').value;
+  const problema = document.getElementById('problema').value;
   const novoId = "OS-" + Math.floor(1000 + Math.random() * 9000);
 
-  // Adiciona o novo item no início da lista
-  equipamentos.unshift({ id: novoId, nome: nome, cliente: cliente, status: status });
+  // Adiciona o novo item com a descrição do problema
+  equipamentos.unshift({ 
+    id: novoId, 
+    nome: nome, 
+    cliente: cliente, 
+    problema: problema,
+    status: status 
+  });
 
-  // Limpa o formulário e atualiza a interface
   this.reset();
   renderizarTabela();
 });
 
-// Função para Atualizar Tabela e Contadores
+// Renderizar Tabela e Contadores
 function renderizarTabela() {
   const tbody = document.getElementById('equipmentTableBody');
   tbody.innerHTML = '';
@@ -51,7 +77,6 @@ function renderizarTabela() {
   equipamentos.forEach(item => {
     let badgeClass = '';
     
-    // Define a cor de acordo com o status
     if (item.status === 'Concluído') {
       badgeClass = 'badge-concluido';
       cConcluido++;
@@ -66,18 +91,17 @@ function renderizarTabela() {
       cCancelado++;
     }
 
-    // Cria a linha da tabela
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><strong>${item.id}</strong></td>
       <td>${item.nome}</td>
       <td>${item.cliente}</td>
+      <td class="problem-text">${item.problema}</td>
       <td><span class="badge ${badgeClass}">${item.status}</span></td>
     `;
     tbody.appendChild(tr);
   });
 
-  // Atualiza os valores nos cards de resumo
   document.getElementById('countConcluido').innerText = cConcluido;
   document.getElementById('countEspera').innerText = cEspera;
   document.getElementById('countAtendimento').innerText = cAtendimento;

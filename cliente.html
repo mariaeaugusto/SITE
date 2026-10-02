@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechVision - Área do Cliente e Técnico</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. TELA DE LOGIN COM MODO DE ACESSO -->
+  <div id="loginScreen" class="login-container">
+    <div class="login-card">
+      <h1 class="brand-title">TechVision</h1>
+      <p class="brand-subtitle">Manutenção de Equipamentos</p>
+      
+      <!-- Alternador de Abas -->
+      <div class="tab-buttons">
+        <button id="tabClientBtn" class="tab-btn active" onclick="alternarAba('cliente')">👤 Sou Cliente</button>
+        <button id="tabTechBtn" class="tab-btn" onclick="alternarAba('tecnico')">🛠️ Sou Técnico</button>
+      </div>
+
+      <!-- FORMULÁRIO DO CLIENTE JÁ CADASTRADO -->
+      <form id="clientLoginForm">
+        <div class="form-group">
+          <label for="cEmail">E-mail Cadastrado ou Código OS</label>
+          <input type="text" id="cEmail" placeholder="Ex: ana@email.com ou OS-1001" required value="ana@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="cSenha">Senha de Acesso</label>
+          <input type="password" id="cSenha" placeholder="••••••••" required value="123456">
+        </div>
+
+        <button type="submit" class="btn-submit">ACESSAR MINHAS SOLICITAÇÕES</button>
+      </form>
+
+      <!-- FORMULÁRIO DO TÉCNICO / ADMIN (INICIALMENTE OCULTO) -->
+      <form id="techLoginForm" style="display: none;">
+        <div class="form-group">
+          <label for="tEmail">E-mail Corporativo</label>
+          <input type="email" id="tEmail" placeholder="tecnico@techvision.com" required value="admin@techvision.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="tSenha">Senha</label>
+          <input type="password" id="tSenha" placeholder="••••••••" required value="admin123">
+        </div>
+
+        <button type="submit" class="btn-submit">ENTRAR COMO TÉCNICO</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. TELA EXCLUSIVA DO CLIENTE LOGADO -->
+  <div id="clientDashboard" class="dashboard-container">
+    <header>
+      <div class="header-logo">
+        TechVision 
+        <span class="badge-role">Área do Cliente</span>
+      </div>
+      <div class="user-info">
+        <span id="clientWelcome">Bem-vindo, Cliente</span>
+        <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Painel de Destaque com o Equipamento do Cliente -->
+      <div class="client-welcome-card">
+        <h2>Acompanhe a Manutenção do Seu Equipamento</h2>
+        <p>Abaixo você pode verificar o status em tempo real do reparo do seu aparelho e registrar novos problemas.</p>
+      </div>
+
+      <!-- Formulário para Nova Solicitação do Cliente -->
+      <h2 class="section-title">Relatar Novo Problema / Equipamento</h2>
+      <div class="add-form-container">
+        <form id="clientNewRequestForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="eqNome">Equipamento</label>
+              <input type="text" id="eqNome" placeholder="Ex: Notebook Dell XPS, iPhone 13" required>
+            </div>
+            <div class="form-group">
+              <label for="eqProblema">Descrição Detalhada do Defeito</label>
+              <input type="text" id="eqProblema" placeholder="Ex: Não liga, tela com manchas, bateria esquentando..." required>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit" style="margin-top: 10px;">Enviar para Análise Técnica</button>
+        </form>
+      </div>
+
+      <!-- Tabela do Cliente -->
+      <h2 class="section-title">Meus Equipamentos Cadastrados</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Código OS</th>
+              <th>Equipamento</th>
+              <th>Problema Relatado</th>
+              <th>Status do Conserto</th>
+            </tr>
+          </thead>
+          <tbody id="clientTableBody">
+            <!-- Gerado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      &copy; TechVision - Soluções em Manutenção Tecnológica. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- 3. TELA DO TÉCNICO / ADMINISTRADOR -->
+  <div id="techDashboard" class="dashboard-container">
+    <header>
+      <div class="header-logo">
+        TechVision 
+        <span class="badge-role">Painel Técnico</span>
+      </div>
+      <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+    </header>
+
+    <main>
+      <h2 class="section-title">Visão Geral de Serviços</h2>
+      <div class="status-summary">
+        <div class="status-card verde">
+          <div class="status-card-info">
+            <h4>Concluídos</h4>
+            <p id="countConcluido">0</p>
+          </div>
+        </div>
+        <div class="status-card laranja">
+          <div class="status-card-info">
+            <h4>Em Espera</h4>
+            <p id="countEspera">0</p>
+          </div>
+        </div>
+        <div class="status-card azul">
+          <div class="status-card-info">
+            <h4>Em Atendimento</h4>
+            <p id="countAtendimento">0</p>
+          </div>
+        </div>
+        <div class="status-card vermelho">
+          <div class="status-card-info">
+            <h4>Cancelados</h4>
+            <p id="countCancelado">0</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Gerenciamento de Ordens de Serviço (Clientes Cadastrados)</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Código OS</th>
+              <th>Cliente</th>
+              <th>E-mail</th>
+              <th>Equipamento</th>
+              <th>Problema Relatado</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="techTableBody">
+            <!-- Gerado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      &copy; TechVision - Soluções em Manutenção Tecnológica. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <script src="cliente.js"></script>
+</body>
+</html>

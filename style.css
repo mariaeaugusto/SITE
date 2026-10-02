@@ -1,19 +1,8 @@
-/* -------------------------------------------------------------
-   PALETA DE CORES TECHVISION:
-   - Fundo Principal: Bege / Creme (#FDFBF7, #F5EFE6)
-   - Títulos e Detalhes: Marrom / Dourado (#6B4226, #B8860B)
-   - Textos: Preto / Cinza Escuro (#222222, #555555)
-   - Status Verde: Concluído (#2E7D32)
-   - Status Laranja/Dourado: Em espera (#D97706)
-   - Status Azul: Atendimento (#1E40AF)
-   - Status Vermelho: Cancelado (#DC2626)
-------------------------------------------------------------- */
-
 :root {
   --bg-cream: #FDFBF7;
   --card-cream: #F5EFE6;
   --brown-title: #6B4226;
-  --gold-accent: #B8860B;
+  --gold-accent: #C49A45;
   --text-dark: #222222;
   --text-muted: #555555;
   
@@ -40,7 +29,7 @@ body {
   flex-direction: column;
 }
 
-/* TELA DE LOGIN */
+/* LOGIN */
 .login-container {
   display: flex;
   justify-content: center;
@@ -53,9 +42,9 @@ body {
   background-color: var(--card-cream);
   border: 2px solid var(--gold-accent);
   border-radius: 12px;
-  padding: 40px 30px;
+  padding: 35px 25px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   box-shadow: 0 8px 24px rgba(107, 66, 38, 0.12);
   text-align: center;
 }
@@ -71,12 +60,36 @@ body {
 .brand-subtitle {
   color: var(--gold-accent);
   font-size: 0.95rem;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 
-.form-group {
+/* ABAS DE SELEÇÃO DE USUÁRIO */
+.tab-buttons {
+  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid var(--brown-title);
+  color: var(--brown-title);
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background-color: var(--brown-title);
+  color: #FFFFFF;
+}
+
+.form-group {
+  margin-bottom: 15px;
   text-align: left;
 }
 
@@ -88,20 +101,22 @@ body {
   margin-bottom: 6px;
 }
 
-.form-group input, .form-group select {
+.form-group input, 
+.form-group select {
   width: 100%;
   padding: 12px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   background-color: #FFFFFF;
   color: var(--text-dark);
-  font-size: 1rem;
+  font-size: 0.95rem;
   outline: none;
 }
 
-.form-group input:focus, .form-group select:focus {
+.form-group input:focus, 
+.form-group select:focus {
   border-color: var(--gold-accent);
-  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+  box-shadow: 0 0 0 2px rgba(196, 154, 69, 0.25);
 }
 
 .btn-submit {
@@ -121,7 +136,7 @@ body {
   background-color: var(--gold-accent);
 }
 
-/* PAINEL PRINCIPAL */
+/* DASHBOARDS */
 .dashboard-container {
   display: none;
   flex-direction: column;
@@ -141,6 +156,29 @@ header {
   color: var(--brown-title);
   font-size: 1.6rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge-role {
+  font-size: 0.75rem;
+  background-color: var(--gold-accent);
+  color: #FFFFFF;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#clientWelcome {
+  font-weight: 600;
+  color: var(--brown-title);
 }
 
 .btn-logout {
@@ -167,6 +205,25 @@ main {
   flex: 1;
 }
 
+.client-welcome-card {
+  background-color: var(--card-cream);
+  border-left: 5px solid var(--gold-accent);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.client-welcome-card h2 {
+  color: var(--brown-title);
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.client-welcome-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
 .section-title {
   color: var(--brown-title);
   font-size: 1.4rem;
@@ -175,7 +232,7 @@ main {
   padding-bottom: 8px;
 }
 
-/* RESUMO DOS STATUS */
+/* RESUMO STATUS TÉCNICO */
 .status-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -191,7 +248,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .status-card.verde { border-color: var(--status-green); }
@@ -199,18 +255,9 @@ main {
 .status-card.azul { border-color: var(--status-blue); }
 .status-card.vermelho { border-color: var(--status-red); }
 
-.status-card-info h4 {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
+.status-card-info h4 { font-size: 0.9rem; color: var(--text-muted); }
+.status-card-info p { font-size: 1.5rem; font-weight: bold; color: var(--text-dark); }
 
-.status-card-info p {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--text-dark);
-}
-
-/* FORMULÁRIO DE CADASTRO */
 .add-form-container {
   background-color: var(--card-cream);
   padding: 20px;
@@ -221,11 +268,11 @@ main {
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
 }
 
-/* TABELA DE EQUIPAMENTOS */
+/* TABELAS */
 .table-responsive {
   overflow-x: auto;
   background-color: #FFFFFF;
@@ -242,12 +289,19 @@ table {
 th, td {
   padding: 14px 16px;
   border-bottom: 1px solid #EEEEEE;
+  vertical-align: middle;
 }
 
 th {
   background-color: var(--card-cream);
   color: var(--brown-title);
   font-weight: 700;
+}
+
+.problem-text {
+  max-width: 280px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
 }
 
 /* BADGES DE STATUS */
@@ -264,6 +318,15 @@ th {
 .badge-espera { background-color: var(--status-orange); }
 .badge-atendimento { background-color: var(--status-blue); }
 .badge-cancelado { background-color: var(--status-red); }
+
+.select-status-table {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: #FFFFFF;
+  font-weight: 600;
+  color: var(--text-dark);
+}
 
 footer {
   text-align: center;

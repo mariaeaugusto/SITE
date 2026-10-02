@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechVision - Área de Serviços</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. TELA DE LOGIN -->
+  <div id="loginScreen" class="login-container">
+    <div class="login-card">
+      <h1 class="brand-title">TechVision</h1>
+      <p class="brand-subtitle">Manutenção de Equipamentos</p>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">E-mail de Acesso</label>
+          <input type="email" id="email" placeholder="seu@email.com" required value="cliente@techvision.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="••••••••" required value="123456">
+        </div>
+
+        <div class="form-group">
+          <label for="perfil">Entrar como</label>
+          <select id="perfil">
+            <option value="cliente">👤 Cliente (Minhas Solicitações)</option>
+            <option value="tecnico">🛠️ Técnico / Administrador</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">ENTRAR NO SISTEMA</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. TELA EXCLUSIVA DO CLIENTE -->
+  <div id="clientScreen" class="dashboard-container">
+    <header>
+      <div class="header-logo">TechVision <span class="badge-role">Área do Cliente</span></div>
+      <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+    </header>
+
+    <main>
+      <h2 class="section-title">Solicitar Manutenção de Equipamento</h2>
+      <div class="add-form-container">
+        <form id="clientRequestForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cEquipamento">Seu Equipamento</label>
+              <input type="text" id="cEquipamento" placeholder="Ex: Notebook Dell XPS, iPhone 13, Console PS5" required>
+            </div>
+            <div class="form-group">
+              <label for="cNome">Seu Nome Completo</label>
+              <input type="text" id="cNome" placeholder="Digite seu nome" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 15px;">
+            <label for="cProblema">Relate o Problema do Equipamento</label>
+            <textarea id="cProblema" rows="3" placeholder="Descreva em detalhes o defeito (ex: não liga, tela quebrada, esquentando muito, travando...)" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Enviar para Avaliação</button>
+        </form>
+      </div>
+
+      <h2 class="section-title">Acompanhar Meus Equipamentos</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Código OS</th>
+              <th>Equipamento</th>
+              <th>Problema Relatado</th>
+              <th>Status do Conserto</th>
+            </tr>
+          </thead>
+          <tbody id="clientTableBody">
+            <!-- Gerado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      &copy; TechVision - Soluções em Manutenção Tecnológica. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- 3. TELA DO TÉCNICO / ADMINISTRADOR -->
+  <div id="techScreen" class="dashboard-container">
+    <header>
+      <div class="header-logo">TechVision <span class="badge-role">Painel Técnico</span></div>
+      <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+    </header>
+
+    <main>
+      <h2 class="section-title">Resumo Geral das Ordens de Serviço</h2>
+      <div class="status-summary">
+        <div class="status-card verde">
+          <div class="status-card-info">
+            <h4>Concluídos</h4>
+            <p id="countConcluido">0</p>
+          </div>
+        </div>
+        <div class="status-card laranja">
+          <div class="status-card-info">
+            <h4>Em Espera</h4>
+            <p id="countEspera">0</p>
+          </div>
+        </div>
+        <div class="status-card azul">
+          <div class="status-card-info">
+            <h4>Em Atendimento</h4>
+            <p id="countAtendimento">0</p>
+          </div>
+        </div>
+        <div class="status-card vermelho">
+          <div class="status-card-info">
+            <h4>Cancelados</h4>
+            <p id="countCancelado">0</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Gerenciar Ordens de Serviço</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Código OS</th>
+              <th>Cliente</th>
+              <th>Equipamento</th>
+              <th>Problema Relatado</th>
+              <th>Alterar Status</th>
+            </tr>
+          </thead>
+          <tbody id="techTableBody">
+            <!-- Gerado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      &copy; TechVision - Soluções em Manutenção Tecnológica. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
